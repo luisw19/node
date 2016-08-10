@@ -232,3 +232,5 @@ docker-compose build
 docker-compose up
 
 (after initial create, 'docker-compose start / stop' can be used instead)
+
+28. Test the API using the postman collection: orders_api/ordersSystemAPI.postman_collection
