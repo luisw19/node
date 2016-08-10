@@ -1,0 +1,27 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "IKEA orders system API",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisw19/node.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Luis Weir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisw19/node/issues"
+  },
+  "homepage": "https://github.com/luisw19/node#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.4"
+  }
+}
