@@ -1,11 +1,11 @@
-Order API 
+Order API
 
 Node/Mongo API in a Container
 (based on: http://adrianmejia.com/blog/2014/10/01/creating-a-restful-api-tutorial-with-nodejs-and-mongodb/ and https://codeforgeek.com/2015/08/restful-api-node-mongodb/)
 
 Install  Node with Brew:
 
-1. If node is already installed manually (not using brew) uninstall as per https://gist.github.com/TonyMtz/d75101d9bdf764c890ef 
+1. If node is already installed manually (not using brew) uninstall as per https://gist.github.com/TonyMtz/d75101d9bdf764c890ef
 	(NOTE: after uninstalling and reinstalling node i had issues with npm which I fixed by cleaning everything up based on http://stackoverflow.com/questions/11177954/how-do-i-completely-uninstall-node-js-and-reinstall-from-beginning-mac-os-x)
 
 2.  Install with brew (if not already) by running
@@ -30,7 +30,7 @@ sudo chown -R luisweir:staff /data
 
 7. Run mongo
 
-mongod 
+mongod
 
 Create MongoDB
 
@@ -59,7 +59,7 @@ NOTE: .save() can also be used which is basically an upsert
 Create project package and set up server
 11. Create project folder
 
-mkdir <path>/<project> ie. mkdir -p $HOME/node/first_api
+mkdir <path>/<project> ie. mkdir -p $HOME/node/orders_api
 
 11. Cd into project folder (ie. $HOME/node/first_api) and create Node project by running:
 
@@ -151,31 +151,36 @@ mkdir model
 
 touch mongo.js
 
-19. Add code accordingly. Of most important is that the mongoose schema is done properly… 
+19. Add code accordingly. Of most important is that the mongoose schema is done properly…
 
 20. Back in root project folder add the API code to server.js
 
-Create docker container for API and DB (https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+Create docker container for API (based on https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
 
+20. install docker. As am using Mac and "brew cask" installation is simple
 
+brew cask install docker
 
+(alternatively docker can be downloaded from the official website https://docs.docker.com/engine/installation/)
 
+21. Create a docker file inside the node application directory
 
+touch Dockerfile
 
+22. Edit the file as following:
 
+FROM node:argon
 
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
+# Install app dependencies
+COPY package.json /usr/src/app/
+RUN npm install
 
+# Bundle app source
+COPY . /usr/src/app
 
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-
+EXPOSE 8080
+CMD [ "npm", "start" ]
