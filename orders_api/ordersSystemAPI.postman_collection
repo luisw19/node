@@ -1,0 +1,139 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ordersSystemAPI",
+		"_postman_id": "0cfefa33-f1d9-a560-14d9-081f1b6e2645",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ORDERS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/orders",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST ORDER",
+			"request": {
+				"url": "http://localhost:3000/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r  \"order\": {\r    \"total_price\": 50,\r    \"currency\": \"EUR\",\r    \"customer\": {\r       \"customer_id\": \"76422323213\",\r       \"first_name\": \"Paul\",\r       \"last_name\": \"Norman\",\r       \"phone\": \"+44 (0) 5555-555-555\",\r       \"email\": \"paul.norman@example.com\"\r    },\r    \"address\": [\r        {\r        \"name\": \"billing\",\r        \"city\": \"Cambridge\",\r        \"county\": \"Cambridgeshire\",\r        \"postcode\": \"CB4 4SS\",\r        \"country\": \"Great Britain\"\r        },\r        {\r        \"name\": \"shipping\",\r        \"city\": \"Cambridge\",\r        \"county\": \"Cambridgeshire\",\r        \"postcode\": \"CB4 4SS\",\r        \"country\": \"Great Britain\"\r        }\r    ],\r    \"line_items\": [{\r        \"product_id\": \"1071823172\",\r        \"product_name\": \"Billy Table White\",\r        \"quantity\": 1,\r        \"price\": 50,\r        \"currency\": \"EUR\",\r        \"grams\": 8000,\r        \"sku\": \"BILLY2009WHITE\"\r     }]\r  }\r}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"request": {
+				"url": "http://localhost:3000/orders/1073459962",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY ID",
+			"request": {
+				"url": "http://localhost:3000/orders/g1x3657hw",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE BY ID",
+			"request": {
+				"url": "http://localhost:3000/orders/joafnqxfj",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r  \"order\": {\r    \"total_price\": 50,\r    \"currency\": \"EUR\",\r    \"customer\": {\r       \"customer_id\": \"123456\",\r       \"first_name\": \"Paul\",\r       \"last_name\": \"Norman\",\r       \"phone\": \"+44 (0) 5555-555-555\",\r       \"email\": \"paul.norman@example.com\"\r    },\r    \"address\": [\r        {\r        \"name\": \"billing\",\r        \"city\": \"Cambridge\",\r        \"county\": \"Cambridgeshire\",\r        \"postcode\": \"CB4 4SS\",\r        \"country\": \"Great Britain\"\r        },\r        {\r        \"name\": \"shipping\",\r        \"city\": \"Cambridge\",\r        \"county\": \"Cambridgeshire\",\r        \"postcode\": \"CB4 4SS\",\r        \"country\": \"Great Britain\"\r        }\r    ],\r    \"line_items\": [{\r        \"product_id\": \"1071823172\",\r        \"product_name\": \"Billy Table White\",\r        \"quantity\": 1,\r        \"price\": 50,\r        \"currency\": \"EUR\",\r        \"grams\": 8000,\r        \"sku\": \"BILLY2009WHITE\"\r     }]\r  }\r}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY SYSTEM ID",
+			"request": {
+				"url": "http://localhost:3000/orders/systemid/578795387d051b2e1d87e58f",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET ORDERS WITH QUERY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/orders?customer=123456&date_from=12/12/2015&date_to=12/12/2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
