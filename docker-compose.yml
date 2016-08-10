@@ -1,7 +1,9 @@
 version: '2'
 services:
   order_api:
-      build: ./orders_api
+      #Uncomment if you wish to build from source code
+      #build: ./orders_api
+      image: luisw19/orders_api
       depends_on:
         - mongo_db
       ports:

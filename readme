@@ -185,36 +185,50 @@ COPY . /usr/src/app
 EXPOSE 8080
 CMD [ "npm", "start" ]
 
-23. Build docker image
+23. Build the container
 
-docker build -t luisw19/orders_api .
+docker build -t luisw19/orders_api
 
-24. Check that your image was added
+24. Push the docker image to docker hub
 
-docker images
+docker login --username=<username>
+docker push <image name>
 
 ###### Install docker compose and create compose file
 
-26. Install docker compose (am using mac so it's straight forward. This can also be downloaded from official page: https://docs.docker.com/compose/)
+23. Install docker compose (am using mac so it's straight forward. This can also be downloaded from official page: https://docs.docker.com/compose/)
 
 brew install docker-compose
 
-27. Create docker compose file in the parent directory
+24. Create docker compose file in the parent directory
 
 touch docker_compose.yml
 
-28. Add content as following:
+25. Add content as following:
 
-order_api:
-    build: ./orders_api
-    depends_on:
-      - mongo_db
-    port:
-      - "3000:8080"
-    command: npm start
+version: '2'
+services:
+  order_api:
+			#Uncomment next line if you wish to build from docker-compose
+			#build: ./orders_api
+			image: luisw19/orders_api
+      depends_on:
+        - mongo_db
+      ports:
+        - "3000:3000"
+      command: npm start
+      links:
+        - mongo_db
 
-    links:
-      - mongo_db
+  mongo_db:
+      image: mongo:3.0.2
 
-mongo_db:
-    image: mongo:3.0.2
+26. Build the container (Only if building from source code -otherwise next step is all needed to run)
+
+docker-compose build
+
+27. Create and start the containers
+
+docker-compose up
+
+(after initial create, 'docker-compose start / stop' can be used instead)
