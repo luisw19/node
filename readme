@@ -184,3 +184,37 @@ COPY . /usr/src/app
 
 EXPOSE 8080
 CMD [ "npm", "start" ]
+
+23. Build docker image
+
+docker build -t luisw19/orders_api .
+
+24. Check that your image was added
+
+docker images
+
+###### Install docker compose and create compose file
+
+26. Install docker compose (am using mac so it's straight forward. This can also be downloaded from official page: https://docs.docker.com/compose/)
+
+brew install docker-compose
+
+27. Create docker compose file in the parent directory
+
+touch docker_compose.yml
+
+28. Add content as following:
+
+order_api:
+    build: ./orders_api
+    depends_on:
+      - mongo_db
+    port:
+      - "3000:8080"
+    command: npm start
+
+    links:
+      - mongo_db
+
+mongo_db:
+    image: mongo:3.0.2

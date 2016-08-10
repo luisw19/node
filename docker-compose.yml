@@ -1,0 +1,14 @@
+version: '2'
+services:
+  order_api:
+      build: ./orders_api
+      depends_on:
+        - mongo_db
+      ports:
+        - "3000:3000"
+      command: npm start
+      links:
+        - mongo_db
+
+  mongo_db:
+      image: mongo:3.0.2

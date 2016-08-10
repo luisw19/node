@@ -1,6 +1,6 @@
 var mongoose    =   require("mongoose");
 //first_db is the mongo db previously created in earlier steps
-mongoose.connect('mongodb://localhost:27017/orders_db');
+mongoose.connect('mongodb://mongo_db:27017/orders_db');
 // create instance of Schema
 var schema =   mongoose.Schema;
 
