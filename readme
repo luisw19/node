@@ -1,0 +1,181 @@
+Order API 
+
+Node/Mongo API in a Container
+(based on: http://adrianmejia.com/blog/2014/10/01/creating-a-restful-api-tutorial-with-nodejs-and-mongodb/ and https://codeforgeek.com/2015/08/restful-api-node-mongodb/)
+
+Install  Node with Brew:
+
+1. If node is already installed manually (not using brew) uninstall as per https://gist.github.com/TonyMtz/d75101d9bdf764c890ef 
+	(NOTE: after uninstalling and reinstalling node i had issues with npm which I fixed by cleaning everything up based on http://stackoverflow.com/questions/11177954/how-do-i-completely-uninstall-node-js-and-reinstall-from-beginning-mac-os-x)
+
+2.  Install with brew (if not already) by running
+
+brew install node
+
+	( I ran into some issues… following blog helped resolve: http://stackoverflow.com/questions/31374143/trouble-install-node-js-with-homebrew )
+
+Install MongoDB (https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-os-x/)
+
+4. Install mongodb with brew
+
+brew install mongodb
+
+5. Create directory needed by mongo process (mongod) to write data
+
+mkdir -p /data/db
+
+6. Change ownership so mongod can write to it
+
+sudo chown -R luisweir:staff /data
+
+7. Run mongo
+
+mongod 
+
+Create MongoDB
+
+8. Start mongo DB
+
+mongod
+
+9. Open a new terminal and run command to open mongo CLI
+
+mongo
+
+10. To create a new DB run
+
+> use orders_db
+> show dbs
+> a = { "order" : { "order_id" : "1073459962", "status" : "created", "created_at" : "2016-04-01T12:00:10-02:00", "updated_at" : "2016-06-06T15:48:20-04:00", "total_price" : 50, "currency" : "EUR", "customer" : { "customer_id" : "76422323213", "first_name" : "Paul", "last_name" : "Norman", "phone" : "+44 (0) 5555-555-555", "email" : "paul.norman@example.com" }, "address" : [ { "type" : "billing, shipping", "city" : "Cambridge", "county" : "Cambridgeshire", "postcode" : "CB4 4SS", "country" : "Great Britain" } ], "line_items" : [ { "line_id" : "1245555432", "product_id" : "1071823172", "product_name" : "Billy Table White", "quantity" : 1, "price" : 50, "currency" : "EUR", "grams" : 8000, "sku" : "BILLY2009WHITE" } ] } }
+> db.orders.insert()
+> show dbs
+> db.orders.find()
+> db.orders.find({ "_id" : ObjectId("578639323179eba600803d19") })
+
+NOTE: .save() can also be used which is basically an upsert
+
+(Note: insert a record otherwise db won’t show info on: http://www.tutorialspoint.com/mongodb/mongodb_create_database.htm and http://www.tutorialspoint.com/mongodb/mongodb_drop_database.htm)
+
+Create project package and set up server
+11. Create project folder
+
+mkdir <path>/<project> ie. mkdir -p $HOME/node/first_api
+
+11. Cd into project folder (ie. $HOME/node/first_api) and create Node project by running:
+
+npm init
+
+This will create a package.json, in my example like this:
+
+{
+  "name": “oders_system_api”,
+  "version": "1.0.0",
+  "description": “IKEA orders system API“,
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisw19/node.git"
+  },
+  "keywords": [
+    "Node.js",
+    "git"
+  ],
+  "author": "Luis Weir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisw19/node/issues"
+  },
+  "homepage": "https://github.com/luisw19/node#readme"
+}
+
+Install required modules in project -not globally (express, mongoose, body-parser)
+
+12. Install express locally on project (more info on https://codeforgeek.com/2014/10/express-complete-tutorial-part-1/)
+
+npm install --save express
+
+13. Install mongoose in project (more info on http://mongoosejs.com/)
+
+npm install --save mongoose
+
+(the --save is so mongoose is added to the dependencies in the package.json -otherwise is just temporarily added)
+
+14. install body-parser
+
+npm install --save body-parser
+
+14. install modules by running (note sure why is this required??)
+
+npm install
+
+Test server
+
+16. Create server.js and add basic code
+
+var express     =   require("express");
+var app         =   express();
+var bodyParser  =   require("body-parser");
+var router      =   express.Router();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({"extended" : false}));
+
+router.get("/",function(req,res){
+    res.json({"error" : false,"message" : "Hello World"});
+});
+
+app.use('/',router);
+
+app.listen(3000);
+console.log("Listening to PORT 3000");
+
+17. Run to test node app
+
+npm start
+
+Open a new terminal and test URL with curl (or use postman or simply use the browser)
+
+curl http://localhost:3000
+
+
+Create API model including DB schema and connection
+
+17. In project folder create a new folder called model
+
+mkdir model
+
+18. Inside the model folder create mongo.js
+
+touch mongo.js
+
+19. Add code accordingly. Of most important is that the mongoose schema is done properly… 
+
+20. Back in root project folder add the API code to server.js
+
+Create docker container for API and DB (https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+
+
+
+
+
+
+
+
+
+
+
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+
