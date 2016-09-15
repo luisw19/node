@@ -13,4 +13,8 @@ services:
         - mongo_db
 
   mongo_db:
+<<<<<<< HEAD
      image: mongo:3.0.2
+=======
+      image: mongo:3.2.9
+>>>>>>> origin/master
