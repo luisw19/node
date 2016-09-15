@@ -2,7 +2,7 @@ version: '2'
 services:
   order_api:
       #Uncomment if you wish to build from source code
-      build: ./orders_api
+      #build: ./orders_api
       image: luisw19/orders_api
       depends_on:
         - mongo_db
@@ -13,8 +13,4 @@ services:
         - mongo_db
 
   mongo_db:
-<<<<<<< HEAD
-     image: mongo:3.0.2
-=======
       image: mongo:3.2.9
->>>>>>> origin/master
