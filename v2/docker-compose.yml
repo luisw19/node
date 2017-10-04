@@ -1,0 +1,17 @@
+version: '2'
+services:
+  order_api:
+      #Uncomment if you wish to build from source code
+      #build: ./orders_api
+      image: luisw19/orders_api_v2
+      depends_on:
+        - mongo_db
+      ports:
+        - "3000:3000"
+      #command: bash register.sh d2VibG9naWM6SUszQVcxbjU= https://oc-144-21-66-168.compute.oraclecloud.com:7202/apiplatform/management/v1/services http://oc-144-21-66-168.compute.oraclecloud.com:3000/orders
+      command: npm start
+      links:
+        - mongo_db
+
+  mongo_db:
+      image: mongo:3.2.9
