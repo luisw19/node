@@ -1,5 +1,6 @@
 var mongoose    =   require("mongoose");
 //first_db is the mongo db previously created in earlier steps
+//if you are running this outside the container, ensure you add in /etc/hosts: 127.0.0.7  mongo_db
 mongoose.connect('mongodb://mongo_db:27017/orders_db');
 // create instance of Schema
 var schema =   mongoose.Schema;
