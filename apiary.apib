@@ -1,0 +1,28 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Orders
+
+Simple get orders collection
+
+## Orders Collection [/orders]
+
+### List All Questions [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "orderId": "order 1",
+                "total_price": 50,
+                "line_items": [
+                    {
+                        "lineItem": 1,
+                        "productName": "Billy Bookshelf",
+                        "quantity": 1,
+                        "price": 50,
+                        "currency": "EUR"
+                    }
+                ]
+            }
+        ]
